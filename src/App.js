@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import EmployeeAdd from "./components/employeeAdd/EmployeeAdd";
+import EmployeeList from "./components/employeeList/EmployeeList";
+import EmployeeUpdate from "./components/employeeUpdate/EmployeeUpdate";
+import { employees } from "./data/data"
 
 function App() {
+
+  const [list, setList] = useState(employees);
+  const [selectedEmployee, setSelectedEmployee] = useState({
+    id: 0,
+    firstName: '',
+    lastName: '',
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Employees App</h1>
+      <EmployeeList
+        setSelectedEmployee={setSelectedEmployee}
+        employees={list}
+        setList={setList} /> {/props tanımı/}
+      <EmployeeAdd employees={list} setList={setList} />
+      <EmployeeUpdate
+        employees={list}
+        setList={setList}
+        selectedEmployee={selectedEmployee}
+        setSelectedEmployee={setSelectedEmployee} />
     </div>
-  );
+  )
 }
 
 export default App;
